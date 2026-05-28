@@ -41,13 +41,14 @@ The building-guided approach excelled in dense urban environments where structur
 
 ## 4. The Limitation: Cross-Event Domain Shift (Test Scene 10)
 
-While the model generalized well to seen disaster types (hurricanes, wildfires), it struggled severely on unseen disaster types. Test Scene 10 was a coastal earthquake, which the model had never encountered.
+While the model generalized well to seen disaster types (Disaster Type 5, Disaster Type 1), it struggled severely on unseen disaster types. Test Scene 10 was a coastal Disaster Type 2, which the model had never encountered.
 
-![Earthquake Domain Shift Failure](C:/Users/Lenovo/.gemini/antigravity-ide/brain/8255d1bc-ae5a-42c2-8e46-9ed8ad04c2af/figures/triplets_test_scene10.png)
+![Disaster Type 2 Domain Shift Failure](C:/Users/Lenovo/.gemini/antigravity-ide/brain/8255d1bc-ae5a-42c2-8e46-9ed8ad04c2af/figures/triplets_test_scene10.png)
 
 > [!WARNING]
 > **Why it failed (IoU 0.037):** 
-> 1. Earthquake damage is often invisible from above (roofs look intact in optical imagery).
+> 1. Disaster Type 2 damage is often invisible from above (roofs look intact in optical imagery).
 > 2. SAR radar over dense coastal cities creates massive speckle noise and shadows that the model had not learned to interpret.
 
 *Note: Even the 1st place GRSS 2025 competition winner suffered massive test set drops (down to 9.7% IoU on the damaged class) due to this exact cross-event domain shift phenomenon.*
+

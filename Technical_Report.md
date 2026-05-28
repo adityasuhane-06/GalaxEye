@@ -357,17 +357,17 @@ The fully trained best model weights (Epoch 79, Val IoU 0.6836) can be downloade
 | 02 | **0.7920** | 0.8840 | Dense urban coastal area, strong building signal |
 | 03 | **0.7881** | 0.8815 | Consistent with Scene 02 performance |
 | 04 | 0.1038 | 0.1880 | Sparse damage, few buildings, weakest scene |
-| 05 | 0.5234 | 0.6871 | Wildfire scene, moderate building density |
+| 05 | 0.5234 | 0.6871 | Disaster Type 1 scene, moderate building density |
 | 06 | **0.8590** | **0.9241** | Dense urban, high building density — **best scene** |
-| 07 | 0.4749 | 0.6439 | Volcanic damage, mixed terrain |
-| 08 | 0.5690 | 0.7253 | Moderate urban density, earthquake damage |
+| 07 | 0.4749 | 0.6439 | Disaster Type 3 damage, mixed terrain |
+| 08 | 0.5690 | 0.7253 | Moderate urban density, Disaster Type 2 damage |
 
 ### 5.3 Per-Scene Test Performance (Unseen Events)
 
 | Scene | IoU | F1 | Disaster Type | Observations |
 |:------|:---:|:--:|:-------------|:------------|
-| 09 | **0.3829** | 0.5538 | Wildfire (suburban) | Good transfer — training includes similar wildfire scene |
-| 10 | 0.0374 | 0.0721 | Earthquake (coastal) | Poor transfer — dense coastal building style unseen in training |
+| 09 | **0.3829** | 0.5538 | Disaster Type 1 (suburban) | Good transfer — training includes similar Disaster Type 1 scene |
+| 10 | 0.0374 | 0.0721 | Disaster Type 2 (coastal) | Poor transfer — dense coastal building style unseen in training |
 
 ### 5.4 Training Progression
 
@@ -397,21 +397,21 @@ The most striking result is the **54% relative drop** from validation IoU (0.65)
 
 **What transfers well:**
 - Building extraction (buildings look similar across events)
-- Wildfire damage patterns (Scene 05 → Scene 09: IoU 0.52 → 0.38)
+- Disaster Type 1 damage patterns (Scene 05 → Scene 09: IoU 0.52 → 0.38)
 - Urban structure recognition
 
 **What does not transfer:**
-- Earthquake damage signatures (vary dramatically by building construction type)
+- Disaster Type 2 damage signatures (vary dramatically by building construction type)
 - SAR backscatter patterns (scene-dependent: soil moisture, vegetation density, urban layout affect SAR differently)
 - Geographic building styles (e.g., suburban residential vs dense coastal urban)
 
 ### 6.2 Scene 10 Failure Analysis (IoU = 0.037)
 
-Scene 10 (coastal town, earthquake damage) is the weakest test scene. Analysis:
+Scene 10 (coastal town, Disaster Type 2 damage) is the weakest test scene. Analysis:
 
 1. **Novel building architecture** — Dense coastal buildings with tightly packed structures and narrow streets are absent from training data. The building extractor likely fails to delineate individual buildings.
 
-2. **Subtle earthquake damage in EO** — Unlike wildfires (which produce visible burn scars), earthquake damage to small buildings is often invisible from above — roofs may appear intact despite internal structural collapse.
+2. **Subtle Disaster Type 2 damage in EO** — Unlike Disaster Type 1 (which produce visible burn scars), Disaster Type 2 damage to small buildings is often invisible from above — roofs may appear intact despite internal structural collapse.
 
 3. **Water body interference** — Coastal tiles contain large ocean areas. Water appears dark in both EO and SAR, but may confuse the model during fusion.
 
@@ -437,7 +437,7 @@ Test precision (0.42) indicates significant false positives. Sources include:
 Test recall (0.53) means nearly half of true damage is missed. Sources include:
 - **Small buildings** — Buildings below the effective receptive field (~32 pixels at the deepest encoder level) may be missed
 - **Partial damage** — Buildings with only minor damage produce subtle feature changes
-- **Novel damage patterns** — The model has not learned earthquake-specific damage features for the dense coastal building style in this scene
+- **Novel damage patterns** — The model has not learned Disaster Type 2-specific damage features for the dense coastal building style in this scene
 
 ---
 
@@ -601,12 +601,12 @@ The building-guided approach excelled in dense urban environments where structur
 
 ### 12.4 The Limitation: Cross-Event Domain Shift (Test Scene 10)
 
-While the model generalized well to seen disaster types (hurricanes, wildfires), it struggled severely on unseen disaster types. Test Scene 10 was a coastal earthquake, which the model had never encountered.
+While the model generalized well to seen disaster types (Disaster Type 5, Disaster Type 1), it struggled severely on unseen disaster types. Test Scene 10 was a coastal Disaster Type 2, which the model had never encountered.
 
-![Earthquake Domain Shift Failure](https://raw.githubusercontent.com/adityasuhane-06/GalaxEye/main/reports/figures/triplets_test_scene10.png)
+![Disaster Type 2 Domain Shift Failure](https://raw.githubusercontent.com/adityasuhane-06/GalaxEye/main/reports/figures/triplets_test_scene10.png)
 
 > **Why it failed (IoU 0.037):** 
-> 1. Earthquake damage is often invisible from above (roofs look intact in optical imagery).
+> 1. Disaster Type 2 damage is often invisible from above (roofs look intact in optical imagery).
 > 2. SAR radar over dense coastal cities creates massive speckle noise and shadows that the model had not learned to interpret.
 
 *Note: Even the 1st place GRSS 2025 competition winner suffered massive test set drops (down to 9.7% IoU on the damaged class) due to this exact cross-event domain shift phenomenon.*
@@ -630,4 +630,5 @@ While the model generalized well to seen disaster types (hurricanes, wildfires),
 7. He, K., Zhang, X., Ren, S., Sun, J. (2016). "Deep Residual Learning for Image Recognition." *IEEE CVPR*. (ResNet)
 
 8. Ronneberger, O., Fischer, P., Brox, T. (2015). "U-Net: Convolutional Networks for Biomedical Image Segmentation." *MICCAI*. (U-Net decoder design)
+
 

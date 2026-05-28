@@ -41,16 +41,16 @@ SPLITS = {
 
 # Scene → event mapping (from BRIGHT DFC25)
 SCENE_EVENT = {
-    "01": "Bata Explosion",
-    "02": "Beirut Explosion",
+    "01": "Bata Disaster Type 4",
+    "02": "Beirut Disaster Type 4",
     "03": "Congo Volcano",
-    "04": "Haiti Earthquake",
-    "05": "Hawaii Wildfire",
+    "04": "Haiti Disaster Type 2",
+    "05": "Hawaii Disaster Type 1",
     "06": "Turkey/LaPalma/Morocco",
     "07": "Libya Flood/Others",
     "08": "Mixed Events",
-    "09": "Marshall Wildfire (TEST)",
-    "10": "Noto Earthquake (TEST)",
+    "09": "Marshall Disaster Type 1 (TEST)",
+    "10": "Noto Disaster Type 2 (TEST)",
 }
 
 DAMAGE_CMAP = ListedColormap(["black", "green", "orange", "red"])
@@ -519,3 +519,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

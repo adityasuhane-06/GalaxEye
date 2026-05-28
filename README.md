@@ -31,7 +31,7 @@ To prevent the 85% pure background noise from drowning out the damage signal dur
 | **IoU** | 0.6486 | 0.3032 |
 | **F1-Score** | 0.7869 | 0.4653 |
 
-The model achieves an outstanding **0.86 IoU in dense urban environments (Scene 06)**. However, cross-event domain shift remains a challenge: the model struggles to generalize to unseen disaster domains, such as coastal earthquakes (Scene 10), where SAR radar speckle acts unpredictably and damage is invisible from an aerial optical view. 
+The model achieves an outstanding **0.86 IoU in dense urban environments (Scene 06)**. However, cross-event domain shift remains a challenge: the model struggles to generalize to unseen disaster domains, such as coastal Disaster Type 2 (Scene 10), where SAR radar speckle acts unpredictably and damage is invisible from an aerial optical view. 
 
 *For a deep dive into the error analysis, read the [Technical Report](Technical_Report.md).*
 
@@ -71,3 +71,4 @@ python run_eval.py
 
 ### 3. Reading the Report
 For a complete understanding of the methodology, architecture diagrams, training progressions, and visual evidence, please open **[`Technical_Report.md`](Technical_Report.md)** in any standard Markdown viewer.
+
