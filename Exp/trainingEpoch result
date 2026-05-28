@@ -1,0 +1,362 @@
+Code directory: /kaggle/working/Exp
+
+======================================================================
+  Building-Guided EO-SAR Change Detection
+  Device: cuda (2 GPUs)
+    GPU 0: Tesla T4 (15.6 GB)
+    GPU 1: Tesla T4 (15.6 GB)
+  Train: /kaggle/working/data/train/train
+  Val:   /kaggle/working/data/val/val
+  Test:  /kaggle/working/data/test/test
+======================================================================
+
+Loading training data...
+  Computing sampling weights for 2781 samples...
+  Positive: 2200 (79.1%), Negative: 581 (20.9%)
+  Effective positive sampling rate: ~98.3%
+Loading validation data...
+  Train: 2781 samples, 173 batches
+  Val:   334 samples, 21 batches
+
+Downloading: "https://download.pytorch.org/models/resnet34-b627a593.pth" to /root/.cache/torch/hub/checkpoints/resnet34-b627a593.pth
+100%|██████████| 83.3M/83.3M [00:00<00:00, 241MB/s]
+Model: 72.04M parameters
+  Using DataParallel on 2 GPUs
+/kaggle/working/kaggle_notebook.py:342: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = GradScaler(enabled=tcfg["use_amp"])
+Backbone FROZEN for 5 warmup epochs
+
+Epoch 1/80 [lr=1.00e-04]
+  Train:   0%|          | 0/173 [00:00<?, ?it/s]/kaggle/working/kaggle_notebook.py:225: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=use_amp):
+  Val  :   0%|          | 0/21 [00:00<?, ?it/s]           /kaggle/working/kaggle_notebook.py:252: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=use_amp):
+                                                        
+  Loss: train=3.9078 val=3.0084 | IoU=0.4738 F1=0.6430 P=0.5029 R=0.8910 thr=0.7 | 104s
+  >>> NEW BEST IoU: 0.4738 (saved)
+Epoch 2/80 [lr=1.00e-04]
+                                                          
+  Loss: train=3.0212 val=2.8525 | IoU=0.5309 F1=0.6936 P=0.6110 R=0.8019 thr=0.7 | 101s
+  >>> NEW BEST IoU: 0.5309 (saved)
+Epoch 3/80 [lr=9.98e-05]
+                                                          
+  Loss: train=2.7722 val=2.5627 | IoU=0.5196 F1=0.6839 P=0.5567 R=0.8862 thr=0.7 | 102s
+  --- No improvement (1/15)
+Epoch 4/80 [lr=9.97e-05]
+                                                          
+  Loss: train=2.5233 val=2.3595 | IoU=0.5369 F1=0.6986 P=0.5828 R=0.8719 thr=0.7 | 101s
+  >>> NEW BEST IoU: 0.5369 (saved)
+Epoch 5/80 [lr=9.94e-05]
+                                                          
+  Loss: train=2.3549 val=2.2169 | IoU=0.5505 F1=0.7101 P=0.6220 R=0.8272 thr=0.7 | 102s
+  >>> NEW BEST IoU: 0.5505 (saved)
+Backbone UNFROZEN
+
+Epoch 6/80 [lr=9.90e-05]
+                                                          
+  Loss: train=2.2733 val=2.2444 | IoU=0.5406 F1=0.7018 P=0.5716 R=0.9088 thr=0.7 | 140s
+  --- No improvement (1/15)
+Epoch 7/80 [lr=9.86e-05]
+                                                          
+  Loss: train=2.1332 val=2.1869 | IoU=0.5685 F1=0.7249 P=0.6199 R=0.8726 thr=0.7 | 140s
+  >>> NEW BEST IoU: 0.5685 (saved)
+Epoch 8/80 [lr=9.81e-05]
+                                                          
+  Loss: train=2.0123 val=2.0069 | IoU=0.5411 F1=0.7022 P=0.5687 R=0.9176 thr=0.7 | 139s
+  --- No improvement (1/15)
+Epoch 9/80 [lr=9.76e-05]
+                                                          
+  Loss: train=1.9600 val=1.9129 | IoU=0.5756 F1=0.7306 P=0.6087 R=0.9136 thr=0.7 | 140s
+  >>> NEW BEST IoU: 0.5756 (saved)
+Epoch 10/80 [lr=9.69e-05]
+                                                          
+  Loss: train=1.9642 val=1.9107 | IoU=0.5881 F1=0.7406 P=0.6455 R=0.8686 thr=0.7 | 139s
+  >>> NEW BEST IoU: 0.5881 (saved)
+Epoch 11/80 [lr=9.62e-05]
+                                                          
+  Loss: train=1.8282 val=1.8907 | IoU=0.5804 F1=0.7345 P=0.6211 R=0.8986 thr=0.7 | 139s
+  --- No improvement (1/15)
+Epoch 12/80 [lr=9.55e-05]
+                                                          
+  Loss: train=1.8475 val=2.0811 | IoU=0.5624 F1=0.7199 P=0.5870 R=0.9305 thr=0.7 | 140s
+  --- No improvement (2/15)
+Epoch 13/80 [lr=9.46e-05]
+                                                          
+  Loss: train=1.8576 val=1.9249 | IoU=0.5785 F1=0.7330 P=0.6077 R=0.9234 thr=0.7 | 139s
+  --- No improvement (3/15)
+Epoch 14/80 [lr=9.37e-05]
+                                                          
+  Loss: train=1.7838 val=1.9071 | IoU=0.5719 F1=0.7277 P=0.5991 R=0.9266 thr=0.7 | 140s
+  --- No improvement (4/15)
+Epoch 15/80 [lr=9.27e-05]
+                                                          
+  Loss: train=1.7940 val=2.0852 | IoU=0.5829 F1=0.7365 P=0.6180 R=0.9111 thr=0.7 | 141s
+  --- No improvement (5/15)
+Epoch 16/80 [lr=9.17e-05]
+                                                          
+  Loss: train=1.7846 val=1.7951 | IoU=0.5938 F1=0.7452 P=0.6357 R=0.9001 thr=0.7 | 141s
+  >>> NEW BEST IoU: 0.5938 (saved)
+Epoch 17/80 [lr=9.05e-05]
+                                                          
+  Loss: train=1.7208 val=1.8607 | IoU=0.5938 F1=0.7451 P=0.6282 R=0.9155 thr=0.7 | 140s
+  --- No improvement (1/15)
+Epoch 18/80 [lr=8.94e-05]
+                                                          
+  Loss: train=1.7754 val=1.7888 | IoU=0.5774 F1=0.7321 P=0.6045 R=0.9280 thr=0.7 | 140s
+  --- No improvement (2/15)
+Epoch 19/80 [lr=8.81e-05]
+                                                          
+  Loss: train=1.6180 val=1.7594 | IoU=0.5775 F1=0.7322 P=0.6043 R=0.9287 thr=0.7 | 140s
+  --- No improvement (3/15)
+Epoch 20/80 [lr=8.68e-05]
+                                                          
+  Loss: train=1.6620 val=1.7281 | IoU=0.6032 F1=0.7525 P=0.6384 R=0.9162 thr=0.7 | 140s
+  >>> NEW BEST IoU: 0.6032 (saved)
+Epoch 21/80 [lr=8.55e-05]
+                                                          
+  Loss: train=1.7031 val=1.7661 | IoU=0.5912 F1=0.7431 P=0.6245 R=0.9173 thr=0.7 | 141s
+  --- No improvement (1/15)
+Epoch 22/80 [lr=8.41e-05]
+                                                          
+  Loss: train=1.6072 val=1.6860 | IoU=0.6095 F1=0.7574 P=0.6451 R=0.9170 thr=0.7 | 140s
+  >>> NEW BEST IoU: 0.6095 (saved)
+Epoch 23/80 [lr=8.26e-05]
+                                                          
+  Loss: train=1.6356 val=1.6657 | IoU=0.5977 F1=0.7482 P=0.6319 R=0.9170 thr=0.7 | 140s
+  --- No improvement (1/15)
+Epoch 24/80 [lr=8.11e-05]
+                                                          
+  Loss: train=1.6638 val=1.7217 | IoU=0.6093 F1=0.7572 P=0.6486 R=0.9096 thr=0.7 | 140s
+  --- No improvement (2/15)
+Epoch 25/80 [lr=7.96e-05]
+                                                          
+  Loss: train=1.6707 val=1.7230 | IoU=0.6113 F1=0.7588 P=0.6481 R=0.9149 thr=0.7 | 140s
+  >>> NEW BEST IoU: 0.6113 (saved)
+Epoch 26/80 [lr=7.80e-05]
+                                                          
+  Loss: train=1.6058 val=1.7387 | IoU=0.6010 F1=0.7508 P=0.6353 R=0.9174 thr=0.7 | 140s
+  --- No improvement (1/15)
+Epoch 27/80 [lr=7.64e-05]
+                                                          
+  Loss: train=1.5565 val=1.7171 | IoU=0.6018 F1=0.7514 P=0.6328 R=0.9248 thr=0.7 | 141s
+  --- No improvement (2/15)
+Epoch 28/80 [lr=7.47e-05]
+                                                          
+  Loss: train=1.5823 val=1.6572 | IoU=0.5952 F1=0.7462 P=0.6199 R=0.9371 thr=0.7 | 140s
+  --- No improvement (3/15)
+Epoch 29/80 [lr=7.30e-05]
+                                                          
+  Loss: train=1.5347 val=1.6140 | IoU=0.6148 F1=0.7615 P=0.6469 R=0.9255 thr=0.7 | 140s
+  >>> NEW BEST IoU: 0.6148 (saved)
+Epoch 30/80 [lr=7.12e-05]
+                                                          
+  Loss: train=1.4983 val=1.6453 | IoU=0.6167 F1=0.7629 P=0.6463 R=0.9307 thr=0.7 | 140s
+  >>> NEW BEST IoU: 0.6167 (saved)
+Epoch 31/80 [lr=6.94e-05]
+                                                          
+  Loss: train=1.5144 val=1.6735 | IoU=0.6181 F1=0.7640 P=0.6510 R=0.9245 thr=0.7 | 141s
+  >>> NEW BEST IoU: 0.6181 (saved)
+Epoch 32/80 [lr=6.76e-05]
+                                                          
+  Loss: train=1.5355 val=1.6961 | IoU=0.6087 F1=0.7568 P=0.6455 R=0.9144 thr=0.7 | 142s
+  --- No improvement (1/15)
+Epoch 33/80 [lr=6.58e-05]
+                                                          
+  Loss: train=1.4905 val=1.6330 | IoU=0.6196 F1=0.7651 P=0.6649 R=0.9011 thr=0.7 | 141s
+  >>> NEW BEST IoU: 0.6196 (saved)
+Epoch 34/80 [lr=6.39e-05]
+                                                          
+  Loss: train=1.5051 val=1.6011 | IoU=0.6175 F1=0.7635 P=0.6607 R=0.9042 thr=0.7 | 141s
+  --- No improvement (1/15)
+Epoch 35/80 [lr=6.21e-05]
+                                                          
+  Loss: train=1.5856 val=1.6243 | IoU=0.6205 F1=0.7658 P=0.6514 R=0.9289 thr=0.7 | 142s
+  >>> NEW BEST IoU: 0.6205 (saved)
+Epoch 36/80 [lr=6.02e-05]
+                                                          
+  Loss: train=1.4481 val=1.5886 | IoU=0.6384 F1=0.7793 P=0.6875 R=0.8992 thr=0.7 | 141s
+  >>> NEW BEST IoU: 0.6384 (saved)
+Epoch 37/80 [lr=5.82e-05]
+                                                          
+  Loss: train=1.4868 val=1.6301 | IoU=0.6346 F1=0.7765 P=0.6832 R=0.8993 thr=0.7 | 141s
+  --- No improvement (1/15)
+Epoch 38/80 [lr=5.63e-05]
+                                                          
+  Loss: train=1.4852 val=1.6024 | IoU=0.6299 F1=0.7729 P=0.6671 R=0.9187 thr=0.7 | 141s
+  --- No improvement (2/15)
+Epoch 39/80 [lr=5.44e-05]
+                                                          
+  Loss: train=1.4481 val=1.5980 | IoU=0.6253 F1=0.7694 P=0.6575 R=0.9273 thr=0.7 | 142s
+  --- No improvement (3/15)
+Epoch 40/80 [lr=5.24e-05]
+                                                          
+  Loss: train=1.3995 val=1.5271 | IoU=0.6588 F1=0.7943 P=0.7072 R=0.9059 thr=0.7 | 142s
+  >>> NEW BEST IoU: 0.6588 (saved)
+Epoch 41/80 [lr=5.05e-05]
+                                                          
+  Loss: train=1.3949 val=1.6411 | IoU=0.6361 F1=0.7776 P=0.6754 R=0.9162 thr=0.7 | 142s
+  --- No improvement (1/15)
+Epoch 42/80 [lr=4.86e-05]
+                                                          
+  Loss: train=1.3879 val=1.5806 | IoU=0.6280 F1=0.7715 P=0.6682 R=0.9125 thr=0.7 | 141s
+  --- No improvement (2/15)
+Epoch 43/80 [lr=4.66e-05]
+                                                          
+  Loss: train=1.3875 val=1.6845 | IoU=0.6249 F1=0.7692 P=0.6631 R=0.9157 thr=0.7 | 143s
+  --- No improvement (3/15)
+Epoch 44/80 [lr=4.47e-05]
+                                                          
+  Loss: train=1.3866 val=1.5764 | IoU=0.6627 F1=0.7972 P=0.7171 R=0.8974 thr=0.7 | 142s
+  >>> NEW BEST IoU: 0.6627 (saved)
+Epoch 45/80 [lr=4.28e-05]
+                                                          
+  Loss: train=1.4304 val=1.5425 | IoU=0.6402 F1=0.7806 P=0.6802 R=0.9159 thr=0.7 | 144s
+  --- No improvement (1/15)
+Epoch 46/80 [lr=4.08e-05]
+                                                          
+  Loss: train=1.3648 val=1.6190 | IoU=0.6339 F1=0.7759 P=0.6713 R=0.9193 thr=0.7 | 144s
+  --- No improvement (2/15)
+Epoch 47/80 [lr=3.89e-05]
+                                                          
+  Loss: train=1.3216 val=1.6306 | IoU=0.6411 F1=0.7813 P=0.6791 R=0.9198 thr=0.7 | 144s
+  --- No improvement (3/15)
+Epoch 48/80 [lr=3.71e-05]
+                                                          
+  Loss: train=1.3007 val=1.5538 | IoU=0.6532 F1=0.7902 P=0.6953 R=0.9151 thr=0.7 | 142s
+  --- No improvement (4/15)
+Epoch 49/80 [lr=3.52e-05]
+                                                          
+  Loss: train=1.2987 val=1.6312 | IoU=0.6448 F1=0.7841 P=0.7046 R=0.8837 thr=0.7 | 142s
+  --- No improvement (5/15)
+Epoch 50/80 [lr=3.34e-05]
+                                                          
+  Loss: train=1.3413 val=1.5585 | IoU=0.6417 F1=0.7818 P=0.6893 R=0.9029 thr=0.7 | 142s
+  --- No improvement (6/15)
+Epoch 51/80 [lr=3.16e-05]
+                                                          
+  Loss: train=1.2530 val=1.5868 | IoU=0.6580 F1=0.7937 P=0.7149 R=0.8922 thr=0.7 | 142s
+  --- No improvement (7/15)
+Epoch 52/80 [lr=2.98e-05]
+                                                          
+  Loss: train=1.3044 val=1.6156 | IoU=0.6395 F1=0.7801 P=0.6871 R=0.9023 thr=0.7 | 142s
+  --- No improvement (8/15)
+Epoch 53/80 [lr=2.80e-05]
+                                                          
+  Loss: train=1.2004 val=1.6461 | IoU=0.6251 F1=0.7693 P=0.6673 R=0.9081 thr=0.7 | 144s
+  --- No improvement (9/15)
+Epoch 54/80 [lr=2.63e-05]
+                                                          
+  Loss: train=1.2711 val=1.6383 | IoU=0.6374 F1=0.7785 P=0.6850 R=0.9017 thr=0.7 | 143s
+  --- No improvement (10/15)
+Epoch 55/80 [lr=2.46e-05]
+                                                          
+  Loss: train=1.2619 val=1.6755 | IoU=0.6573 F1=0.7932 P=0.7183 R=0.8856 thr=0.7 | 143s
+  --- No improvement (11/15)
+Epoch 56/80 [lr=2.30e-05]
+                                                          
+  Loss: train=1.3220 val=1.5967 | IoU=0.6497 F1=0.7877 P=0.7008 R=0.8992 thr=0.7 | 143s
+  --- No improvement (12/15)
+Epoch 57/80 [lr=2.14e-05]
+                                                          
+  Loss: train=1.2698 val=1.5528 | IoU=0.6586 F1=0.7941 P=0.7032 R=0.9121 thr=0.7 | 144s
+  --- No improvement (13/15)
+Epoch 58/80 [lr=1.99e-05]
+                                                          
+  Loss: train=1.2468 val=1.5782 | IoU=0.6689 F1=0.8016 P=0.7247 R=0.8969 thr=0.7 | 144s
+  >>> NEW BEST IoU: 0.6689 (saved)
+Epoch 59/80 [lr=1.84e-05]
+                                                          
+  Loss: train=1.1613 val=1.6809 | IoU=0.6550 F1=0.7915 P=0.7115 R=0.8918 thr=0.7 | 146s
+  --- No improvement (1/15)
+Epoch 60/80 [lr=1.69e-05]
+                                                          
+  Loss: train=1.1866 val=1.6108 | IoU=0.6745 F1=0.8056 P=0.7378 R=0.8872 thr=0.7 | 145s
+  >>> NEW BEST IoU: 0.6745 (saved)
+Epoch 61/80 [lr=1.55e-05]
+                                                          
+  Loss: train=1.2338 val=1.5594 | IoU=0.6698 F1=0.8023 P=0.7201 R=0.9055 thr=0.7 | 145s
+  --- No improvement (1/15)
+Epoch 62/80 [lr=1.42e-05]
+                                                          
+  Loss: train=1.2722 val=1.5393 | IoU=0.6652 F1=0.7990 P=0.7115 R=0.9109 thr=0.7 | 148s
+  --- No improvement (2/15)
+Epoch 63/80 [lr=1.29e-05]
+                                                          
+  Loss: train=1.1795 val=1.5677 | IoU=0.6748 F1=0.8059 P=0.7326 R=0.8954 thr=0.7 | 146s
+  >>> NEW BEST IoU: 0.6748 (saved)
+Epoch 64/80 [lr=1.16e-05]
+                                                          
+  Loss: train=1.1769 val=1.5771 | IoU=0.6668 F1=0.8001 P=0.7192 R=0.9016 thr=0.7 | 147s
+  --- No improvement (1/15)
+Epoch 65/80 [lr=1.05e-05]
+                                                          
+  Loss: train=1.1173 val=1.5861 | IoU=0.6715 F1=0.8035 P=0.7237 R=0.9030 thr=0.7 | 146s
+  --- No improvement (2/15)
+Epoch 66/80 [lr=9.34e-06]
+                                                          
+  Loss: train=1.1669 val=1.5789 | IoU=0.6762 F1=0.8068 P=0.7358 R=0.8931 thr=0.7 | 146s
+  >>> NEW BEST IoU: 0.6762 (saved)
+Epoch 67/80 [lr=8.29e-06]
+                                                          
+  Loss: train=1.1842 val=1.5799 | IoU=0.6690 F1=0.8017 P=0.7212 R=0.9024 thr=0.7 | 148s
+  --- No improvement (1/15)
+Epoch 68/80 [lr=7.31e-06]
+                                                          
+  Loss: train=1.1553 val=1.5840 | IoU=0.6605 F1=0.7956 P=0.7055 R=0.9119 thr=0.7 | 148s
+  --- No improvement (2/15)
+Epoch 69/80 [lr=6.40e-06]
+                                                          
+  Loss: train=1.1136 val=1.6352 | IoU=0.6641 F1=0.7981 P=0.7169 R=0.9000 thr=0.7 | 147s
+  --- No improvement (3/15)
+Epoch 70/80 [lr=5.55e-06]
+                                                          
+  Loss: train=1.1188 val=1.6129 | IoU=0.6598 F1=0.7950 P=0.7070 R=0.9081 thr=0.7 | 148s
+  --- No improvement (4/15)
+Epoch 71/80 [lr=4.77e-06]
+                                                          
+  Loss: train=1.1209 val=1.6623 | IoU=0.6737 F1=0.8051 P=0.7394 R=0.8835 thr=0.7 | 149s
+  --- No improvement (5/15)
+Epoch 72/80 [lr=4.06e-06]
+                                                          
+  Loss: train=1.0543 val=1.5971 | IoU=0.6781 F1=0.8082 P=0.7355 R=0.8969 thr=0.7 | 148s
+  >>> NEW BEST IoU: 0.6781 (saved)
+Epoch 73/80 [lr=3.42e-06]
+                                                          
+  Loss: train=1.1134 val=1.5650 | IoU=0.6724 F1=0.8041 P=0.7268 R=0.8999 thr=0.7 | 148s
+  --- No improvement (1/15)
+Epoch 74/80 [lr=2.86e-06]
+                                                          
+  Loss: train=1.0514 val=1.6033 | IoU=0.6827 F1=0.8114 P=0.7397 R=0.8985 thr=0.7 | 148s
+  >>> NEW BEST IoU: 0.6827 (saved)
+Epoch 75/80 [lr=2.37e-06]
+                                                          
+  Loss: train=1.1464 val=1.6168 | IoU=0.6798 F1=0.8094 P=0.7451 R=0.8858 thr=0.7 | 148s
+  --- No improvement (1/15)
+Epoch 76/80 [lr=1.95e-06]
+                                                          
+  Loss: train=1.1201 val=1.5939 | IoU=0.6756 F1=0.8064 P=0.7306 R=0.8998 thr=0.7 | 148s
+  --- No improvement (2/15)
+Epoch 77/80 [lr=1.61e-06]
+                                                          
+  Loss: train=1.0579 val=1.5920 | IoU=0.6740 F1=0.8053 P=0.7261 R=0.9037 thr=0.7 | 148s
+  --- No improvement (3/15)
+Epoch 78/80 [lr=1.34e-06]
+                                                          
+  Loss: train=1.0928 val=1.5875 | IoU=0.6755 F1=0.8063 P=0.7322 R=0.8972 thr=0.7 | 148s
+  --- No improvement (4/15)
+Epoch 79/80 [lr=1.15e-06]
+                                                          
+  Loss: train=1.0907 val=1.5851 | IoU=0.6836 F1=0.8121 P=0.7449 R=0.8926 thr=0.7 | 150s
+  >>> NEW BEST IoU: 0.6836 (saved)
+Epoch 80/80 [lr=1.04e-06]
+                                                          
+  Loss: train=1.0738 val=1.5836 | IoU=0.6805 F1=0.8099 P=0.7381 R=0.8971 thr=0.7 | 147s
+  --- No improvement (1/15)
+
+======================================================================
+  TRAINING COMPLETE
+  Time:         189.5 minutes
+  Best Val IoU: 0.6836
+  Checkpoints:  /kaggle/working/checkpoints
+======================================================================
+add Codeadd Markdown

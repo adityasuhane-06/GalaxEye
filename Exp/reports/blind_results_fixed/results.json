@@ -1,0 +1,39 @@
+{
+  "data_path": "data/test/test",
+  "weights": "Exp/best.pth",
+  "threshold": 0.7,
+  "tta": false,
+  "n_samples": 77,
+  "metrics": {
+    "iou": 0.2955,
+    "f1": 0.4562,
+    "precision": 0.381,
+    "recall": 0.5681,
+    "tp": 1231322,
+    "fp": 2000116,
+    "fn": 935978,
+    "tn": 76572936
+  },
+  "per_scene": {
+    "09": {
+      "iou": 0.3802,
+      "f1": 0.5509,
+      "precision": 0.4771,
+      "recall": 0.6518,
+      "tp": 1159056,
+      "fp": 1270442,
+      "fn": 619205,
+      "tn": 36797184
+    },
+    "10": {
+      "iou": 0.0646,
+      "f1": 0.1214,
+      "precision": 0.0901,
+      "recall": 0.1858,
+      "tp": 72266,
+      "fp": 729674,
+      "fn": 316773,
+      "tn": 39775752
+    }
+  }
+}

@@ -1,0 +1,19 @@
+
+Loaded best checkpoint (epoch 79, val IoU=0.6836, threshold=0.7)
+Test samples: 77
+Test:   0%|          | 0/77 [00:00<?, ?it/s]/tmp/ipykernel_57/2827236626.py:49: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Test: 100%|██████████| 77/77 [00:25<00:00,  2.99it/s]
+
+==================================================
+  TEST RESULTS (threshold=0.7)
+==================================================
+  IoU:       0.3032
+  F1:        0.4653
+  Precision: 0.4155
+  Recall:    0.5288
+  TP=1146037  FP=1612174  FN=1021263  TN=76960872
+
+  Per-Scene:
+    Scene 09: IoU=0.3829
+    Scene 10: IoU=0.0374
