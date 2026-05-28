@@ -1,0 +1,27 @@
+Total time spent:
+- Data exploration: approximately 2 hours
+- Literature reading: approximately 2 hours
+- Implementation and debugging: approximately 7 hours
+- Training experiments: approximately 4 hours
+- Evaluation and threshold sweeps: approximately 1.5 hours
+- Report writing and repository cleanup: approximately 2 hours
+- Total: approximately 18.5 hours
+
+Machine used for training:
+- Cloud platform: Kaggle
+- GPU model and VRAM: NVIDIA Tesla T4, approximately 14.56 GB VRAM each
+- Number of GPUs: 2
+- Local development machine: NVIDIA GeForce RTX 3050 Laptop GPU, 4 GB VRAM
+- CPU/RAM: Kaggle notebook default CPU/RAM; exact CPU model was not recorded
+
+Training time:
+- Approximate time per epoch: 5 minutes, including validation
+- Main final training run: 32 full epochs plus a partial 33rd epoch
+- Best checkpoint selected at epoch 28 based on validation IoU
+- Approximate final-run wall-clock training time: 2.7 hours
+- Additional evaluation/threshold sweep time: approximately 20 to 30 minutes
+
+Constraints:
+- The final approach was shaped by severe class imbalance, cross-scene domain shift, limited training time, and the need to keep the code reproducible.
+- No external remote-sensing datasets or additional remote-sensing imagery were used for training or fine-tuning.
+- Training was moved from the local RTX 3050 Laptop GPU to Kaggle T4 GPUs because the local 4 GB GPU was slow and thermally constrained.

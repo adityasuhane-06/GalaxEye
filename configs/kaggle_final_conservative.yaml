@@ -1,0 +1,67 @@
+seed: 2026
+device: auto
+
+data:
+  train_dir: data/train/train
+  val_dir: data/val/val
+  test_dir: data/test/test
+  image_size: 384
+  multiscale_train_sizes: [384]
+  input_channels: 4
+  positive_crop_prob: 0.40
+  grayscale_prob: 0.35
+  sar_speckle_prob: 0.45
+  channel_shuffle_prob: 0.15
+  brightness_contrast_prob: 0.50
+  max_train_samples: 2781
+  max_val_samples: 334
+  num_workers: 4
+  persistent_workers: true
+  prefetch_factor: 2
+  pin_memory: true
+
+training:
+  epochs: 35
+  batch_size: 8
+  use_data_parallel: false
+  device_ids: [0]
+  learning_rate: 0.00025
+  weight_decay: 0.01
+  optimizer: adamw
+  scheduler: cosine
+  amp: true
+  grad_clip_norm: 1.0
+  val_every: 1
+  early_stopping_patience: null
+  log_interval: 25
+  checkpoint_dir: outputs/checkpoints_gated_difference
+  resume: null
+
+loss:
+  name: bce_dice
+  bce_weight: 0.25
+  dice_weight: 0.75
+  pos_weight: 8.0
+  smooth: 1.0
+
+model:
+  name: cross_modal_gated_unet
+  dropout: 0.25
+  use_aspp: true
+
+augmentation:
+  horizontal_flip: true
+  vertical_flip: true
+  random_rot90: true
+
+evaluation:
+  threshold: 0.5
+  binary_source: binary
+  val_full_image: true
+  tile_size: 384
+  tile_stride: 384
+  checkpoint_threshold_sweep: true
+  checkpoint_metric: best_threshold_iou
+  train_tta: false
+  save_visualizations: true
+  visualization_count: 12

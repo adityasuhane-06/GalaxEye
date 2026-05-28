@@ -30,14 +30,12 @@ from tqdm import tqdm
 from PIL import Image
 from collections import defaultdict
 
-# ─── Add Exp/ to path so we can import model ──────────────────────────────
-sys.path.insert(0, str(Path(__file__).resolve().parent / "Exp"))
 from importlib import import_module
 model_mod = import_module("05_model")
 BuildingGuidedChangeDetector = model_mod.BuildingGuidedChangeDetector
 
 # ─── Config ───────────────────────────────────────────────────────────────
-WEIGHTS    = "Exp/best.pth"         # ← your best model weights
+WEIGHTS    = "best.pth"             # ← your best model weights
 THRESHOLD  = 0.7                    # ← tuned on validation set
 EO_MEAN    = np.array([0.3217, 0.3462, 0.2881], dtype=np.float32).reshape(1,1,3)
 EO_STD     = np.array([0.2406, 0.2160, 0.2056], dtype=np.float32).reshape(1,1,3)
