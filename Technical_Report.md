@@ -37,38 +37,6 @@ Our task presents a **cross-modal** challenge: pre-event imagery is optical (3-c
 
 The BRIGHT dataset paper (Wang et al., 2025) benchmarks multiple architectures on a similar EO–SAR damage assessment task. Their finding: even the best methods achieve mIoU < 70% on the development set, and performance drops sharply on unseen disaster events. The cross-event domain shift — where models trained on one set of disasters fail on unseen disaster types — is consistently identified as the fundamental challenge across all methods.
 
-### 1.3 Our Dataset
-
-The dataset provided for this assignment is an EO–SAR change detection dataset containing co-registered pre-event optical and post-event SAR image pairs across multiple disaster events. It shares structural similarities with benchmarks like BRIGHT (Wang et al., 2025) — both involve multi-event disaster assessment with cross-modal imagery — though we do not claim it to be the same dataset. Key characteristics identified from our exploratory data analysis:
-
-- **10 disaster scenes** spanning diverse geographic regions and disaster types (wildfire, hurricane, earthquake, explosion, volcanic eruption)
-- **3,192 image triplets** (pre-event EO 1024×1024×3, post-event SAR 1024×1024×1, target mask 1024×1024×1)
-- **4 original classes:** Background (0), Intact (1), Damaged (2), Destroyed (3) — remapped to binary: {0,1} → 0 (No-Change), {2,3} → 1 (Change)
-- **Fixed splits:** Scenes 01–08 for train/val (seen events), Scenes 09–10 for test (unseen events)
-
-The critical design of this dataset is that **test scenes come from entirely different disaster events** than training, making cross-event generalisation the central challenge.
-
-
-### 1.4 Building-Guided Pseudo-Label Learning (DFC 2025 1st Place)
-
-The most directly relevant prior work is the **1st-place solution of the IEEE GRSS Data Fusion Contest 2025, Track 2**, which operated on the BRIGHT benchmark — a similar EO–SAR disaster damage assessment task. Their key insight, which we adopt: *disaster damage only occurs to buildings* — therefore, first localise buildings, then classify damage only within building regions.
-
-Their two-stage pipeline:
-1. **Stage 1:** Extract building footprints from pre-event EO using a PVT-v2 ensemble
-2. **Stage 2:** Classify damage within building regions using EO + SAR features
-3. **Final prediction:** Building Mask ⊙ Damage Classification
-
-Additionally, they employed pseudo-label learning — generating building labels from confident model predictions and iteratively refining them. Their development mIoU reached **74.44%**, but their test-phase Damaged IoU dropped to **9.75%**, confirming the severity of the cross-event domain shift.
-
-### 1.5 Domain Adaptation Approaches
-
-**SDACD (Supervised Domain Adaptation for Change Detection)** addresses domain shift between pre/post-event images using CycleGAN-based style transfer and feature-level domain discriminators. While designed for same-modality temporal change detection, the conceptual framework of learning domain-invariant features applies to our cross-modal setting.
-
-**DAVI (Foundation Model-based Test-time Adaptation for Disaster Assessment)** uses SAM (Segment Anything Model) as a building prior at test time, combined with entropy minimisation for test-time adaptation. This approach is particularly relevant because it addresses exactly our problem: models failing on unseen disaster domains.
-
-### 1.6 Synthetic Data Approaches
-
-**NeDS (Neural Disaster Simulation)** trains a conditional diffusion model to simulate disaster damage on pre-event images, generating synthetic training data for target domains. While computationally prohibitive (8× H100 GPUs), it represents a promising future direction for cross-event generalisation.
 
 ---
 
