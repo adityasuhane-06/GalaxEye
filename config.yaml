@@ -1,0 +1,83 @@
+seed: 2026
+device: auto  # auto-detects CUDA / CPU
+
+# ─── Data ──────────────────────────────────────────────────────────────────
+data:
+  train_dir: data/train/train
+  val_dir:   data/val/val
+  test_dir:  data/test/test
+
+  crop_size: 512              # 512×512 random crop from 1024×1024 tiles
+  max_train_samples: 2781
+  max_val_samples: 334
+  num_workers: 4
+  pin_memory: true
+  persistent_workers: true
+
+# ─── Training ──────────────────────────────────────────────────────────────
+training:
+  epochs: 80
+  batch_size: 16              # 8 per GPU × 2 GPUs (DataParallel on T4×2)
+  use_data_parallel: true
+  device_ids: [0, 1]
+
+  learning_rate: 0.0001       # 1e-4 standard for ResNet fine-tuning
+  weight_decay: 0.0001        # light L2 regularisation
+  optimizer: adamw
+  scheduler: cosine
+  t_max: 80                   # full cosine cycle
+  eta_min: 0.000001           # 1e-6 lower bound
+
+  amp: true                   # automatic mixed precision (FP16 fwd / FP32 grad)
+  grad_clip_norm: 1.0
+
+  freeze_backbone_epochs: 5   # freeze ResNet34 for first 5 epochs (decoder warmup)
+  early_stopping_patience: 15 # did not trigger — model improved until epoch 79
+  val_every: 1                # validate every epoch
+  checkpoint_dir: checkpoints
+
+  # Smart oversampling: positive (damage) tiles weighted 10× over negatives
+  oversample_positive_weight: 10.0
+
+# ─── Model ─────────────────────────────────────────────────────────────────
+model:
+  name: building_guided_two_stage
+  backbone: resnet34          # ImageNet-1K pretrained
+  pretrained: true
+
+  # Stage 1 — BuildingExtractor (EO only → building mask)
+  stage1_in_channels: 3
+
+  # Stage 2 — DamageClassifier (late-fusion: separate EO + SAR encoders)
+  stage2_eo_channels: 3
+  stage2_sar_channels: 3      # SAR (1ch) replicated to 3ch to reuse pretrained conv1
+
+# ─── Loss ──────────────────────────────────────────────────────────────────
+loss:
+  # Building loss (Stage 1)
+  building_weight: 1.0
+  building_bce_pos_weight: 5.0   # buildings are ~15% of pixels
+  building_dice_smooth: 1.0
+
+  # Damage loss (Stage 2) — masked to building regions only
+  damage_weight: 1.0
+  damage_bce_pos_weight: 10.0    # damaged pixels are minority even within buildings
+  damage_dice_smooth: 1.0
+
+  # Auxiliary 4-class head
+  aux_weight: 0.4
+  aux_class_weights: [0.1, 0.5, 10.0, 5.0]  # [BG, Intact, Damaged, Destroyed]
+
+# ─── Augmentation ──────────────────────────────────────────────────────────
+augmentation:
+  horizontal_flip: true   # p=0.5
+  vertical_flip: true     # p=0.5
+  random_rot90: true      # 90/180/270°, p=0.5
+
+# ─── Evaluation ────────────────────────────────────────────────────────────
+evaluation:
+  threshold: 0.7              # optimal threshold (maximises val IoU, swept 0.1–0.9)
+  tta: true                   # test-time augmentation: original + h-flip + v-flip
+  tta_count: 3
+  save_visualizations: true
+  visualization_count: 10
