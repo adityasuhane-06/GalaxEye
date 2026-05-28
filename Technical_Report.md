@@ -607,7 +607,7 @@ The test IoU of 0.30 is competitive for a single-model, single-training-run appr
 
 Before designing the architecture, a comprehensive data audit was run across the 2.9 billion pixels in the training set. The audit revealed a massive 62.7:1 imbalance.
 
-![Class Imbalance Distribution](reports/figures/class_imbalance.png)
+![Class Imbalance Distribution](https://raw.githubusercontent.com/adityasuhane-06/GalaxEye/main/reports/figures/class_imbalance.png)
 
 > **Key Finding:** 98.4% of all pixels are background. A standard segmentation model predicts "no change" everywhere and achieves 98.4% accuracy with 0 IoU. This physical constraint required a massive architectural rethink.
 
@@ -617,7 +617,7 @@ Because damage *only* happens to buildings, the problem was split into two stage
 1. Extract building footprints from the optical (EO) image.
 2. Evaluate damage using EO and SAR *only within those building footprints*.
 
-![Building vs Background Statistics](reports/figures/building_vs_background.png)
+![Building vs Background Statistics](https://raw.githubusercontent.com/adityasuhane-06/GalaxEye/main/reports/figures/building_vs_background.png)
 
 By masking the loss function during training, the 85% pure background noise was silenced (zero gradient), forcing the model to focus purely on structural changes.
 
@@ -625,7 +625,7 @@ By masking the loss function during training, the 85% pure background noise was 
 
 The building-guided approach excelled in dense urban environments where structures were clearly visible. Scene 06 (Dense Urban) achieved an outstanding **IoU of 0.86**.
 
-![Dense Urban Training Success](reports/figures/triplets_train_scene06.png)
+![Dense Urban Training Success](https://raw.githubusercontent.com/adityasuhane-06/GalaxEye/main/reports/figures/triplets_train_scene06.png)
 
 > *Left:* Pre-disaster Optical (EO)  
 > *Middle:* Post-disaster Radar (SAR)  
@@ -635,7 +635,7 @@ The building-guided approach excelled in dense urban environments where structur
 
 While the model generalized well to seen disaster types (hurricanes, wildfires), it struggled severely on unseen disaster types. Test Scene 10 was a coastal earthquake, which the model had never encountered.
 
-![Earthquake Domain Shift Failure](reports/figures/triplets_test_scene10.png)
+![Earthquake Domain Shift Failure](https://raw.githubusercontent.com/adityasuhane-06/GalaxEye/main/reports/figures/triplets_test_scene10.png)
 
 > **Why it failed (IoU 0.037):** 
 > 1. Earthquake damage is often invisible from above (roofs look intact in optical imagery).
@@ -662,3 +662,4 @@ While the model generalized well to seen disaster types (hurricanes, wildfires),
 7. He, K., Zhang, X., Ren, S., Sun, J. (2016). "Deep Residual Learning for Image Recognition." *IEEE CVPR*. (ResNet)
 
 8. Ronneberger, O., Fischer, P., Brox, T. (2015). "U-Net: Convolutional Networks for Biomedical Image Segmentation." *MICCAI*. (U-Net decoder design)
+
