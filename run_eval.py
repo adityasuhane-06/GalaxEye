@@ -6,14 +6,14 @@ from pathlib import Path
 from collections import defaultdict
 from tqdm import tqdm
 
-sys.path.insert(0, "/kaggle/working")
+sys.path.insert(0, ".")
 from importlib import import_module
 model_mod = import_module("05_model")
 
 # ─── Load Model ──────────────────────────────────────────────────────
 device = torch.device("cuda")
 model = model_mod.BuildingGuidedChangeDetector(pretrained=False)
-ckpt = torch.load("/kaggle/working/checkpoints/best.pth", map_location=device)
+ckpt = torch.load("best.pth", map_location=device)
 model.load_state_dict(ckpt["model_state_dict"])
 model = model.to(device).eval()
 
@@ -106,6 +106,6 @@ test_results = evaluate_split("data/test/test", "Test", best_thr)
 
 # Save results
 results = {"val": val_results, "test": test_results, "threshold": best_thr}
-with open("/kaggle/working/eval_results.json", "w") as f:
+with open("eval_results.json", "w") as f:
     json.dump(results, f, indent=2)
 print(f"\nResults saved to eval_results.json")
