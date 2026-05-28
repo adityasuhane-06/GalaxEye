@@ -117,6 +117,8 @@ Final Output:
   Change Probability = Building Probability × Damage Probability
 ```
 
+> **Important:** Both stages are implemented as **a single end-to-end `nn.Module`** (`BuildingGuidedChangeDetector`) containing two internal sub-modules (`self.building_extractor` and `self.damage_classifier`). They are trained **jointly** in one forward pass and one backward pass — not as two separately trained models. This produces a single checkpoint file (`best.pth`).
+
 #### Stage 1: BuildingExtractor
 
 A standard U-Net with a ResNet34 encoder, processing **only the pre-event EO image** (3 channels). The encoder extracts multi-scale features at 4 resolutions (H/4, H/8, H/16, H/32), which are decoded back to full resolution through transpose convolution blocks with skip connections.
