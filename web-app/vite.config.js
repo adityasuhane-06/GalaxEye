@@ -16,9 +16,13 @@ export default defineConfig({
     target: 'esnext',
     rollupOptions: {
       output: {
-        manualChunks: {
-          three: ['three', '@react-three/fiber', '@react-three/drei'],
-          onnx: ['onnxruntime-web'],
+        manualChunks(id) {
+          if (id.includes('node_modules/three') || id.includes('node_modules/@react-three')) {
+            return 'three';
+          }
+          if (id.includes('node_modules/onnxruntime-web')) {
+            return 'onnx';
+          }
         },
       },
     },
